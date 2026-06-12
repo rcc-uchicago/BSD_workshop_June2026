@@ -15,4 +15,13 @@
 ulimit -l unlimited
 ulimit -u 10000
 
+# Load the default OpenMPI module.
+module load openmpi
+make clean
+make -f Makefile
+
+# Set OMP_NUM_THREADS to the number of CPUs per task we asked for.
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+
 mpirun ./HostMap
